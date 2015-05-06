@@ -1,14 +1,14 @@
 .container
   %ul.nav.nav-pills
     %li
-      =link_to "Change my account", edit_user_registration_path
+      = link_to "Change my account", edit_user_registration_path
     %li
-      =link_to "Login", new_user_session_path unless current_user
+      = link_to "Login", new_user_session_path unless current_user
     %li
-      =link_to "Logout", destroy_user_session_path, method: :delete if current_user
+      = link_to "Logout", destroy_user_session_path, method: :delete if current_user
   %h1 Users list
   .row
-    -if current_user
-      -@users.each do |user|
+    - if current_user
+      - @users.each do |user|
         .col-md-12
-          =user.email
+          = user.email
