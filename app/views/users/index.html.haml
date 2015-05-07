@@ -12,3 +12,12 @@
       - @users.each do |user|
         .col-md-12
           = user.email
+
+= link_to "Large modal","#", class: "btn btn-primary", data: {toggle: "modal", target: "#modal_1" }
+= modal_helper("Header", target: "modal_1") do
+  .modal-body
+    %p One fine body…
+  .modal-footer
+    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+    %button.btn.btn-primary{:type => "button"} Save changes
+
