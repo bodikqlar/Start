@@ -1,0 +1,22 @@
+%h1 Movies
+%table
+  %thead
+    %tr
+      %th Name
+      %th Rating
+      %th Categories
+      %th
+      %th
+      %th
+  %tbody
+    - @movies.each do |movie|
+      %tr
+        %td= movie.user.email
+        %td= movie.name
+        %td= movie.rating
+        %td= movie.categories.pluck(:name).join(', ')
+        - if owner(movie.user)
+          %td= link_to 'Edit', edit_movie_path(movie.id)
+          %td= link_to 'Delete', movie_path(movie.id) , method: :delete, data: { confirm: 'Are you sure?' }
+
+= link_to 'Add movie', new_movie_path

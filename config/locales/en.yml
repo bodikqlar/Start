@@ -20,4 +20,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  category:
+    successful_create: 'Category was successfully created.'
+    successful_update: 'Category was successfully updated.'
+    successful_destroy: 'Category was successfully destroyed.'
+    error_destroy: 'You can not delete this category.'
+
+  movie:
+    successful_create: 'Movie was successfully created.'
+    successful_update: 'Movie was successfully updated.'
+    successful_destroy: 'Movie was successfully destroyed.'
+    error_destroy: 'You can not delete this movie.'

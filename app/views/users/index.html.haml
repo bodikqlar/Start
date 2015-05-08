@@ -1,11 +1,16 @@
 .container
   %ul.nav.nav-pills
     %li
-      = link_to "Change my account", edit_user_registration_path
+      = link_to 'Change my account', edit_user_registration_path
     %li
-      = link_to "Login", new_user_session_path unless current_user
-    %li
-      = link_to "Logout", destroy_user_session_path, method: :delete if current_user
+      = link_to 'Login', new_user_session_path unless current_user
+    - if current_user
+      %li
+        = link_to 'Logout', destroy_user_session_path, method: :delete
+      %li
+        = link_to 'Movies', movies_path
+      %li
+        = link_to 'Categories', categories_path
   %h1 Users list
   .row
     - if current_user
@@ -13,11 +18,11 @@
         .col-md-12
           = user.email
 
-= link_to "Large modal","#", class: "btn btn-primary", data: {toggle: "modal", target: "#modal_1" }
-= modal_helper("Header", target: "modal_1") do
+= link_to 'Large modal','#', class: 'btn btn-primary', data: {toggle: 'modal', target: '#modal_1' }
+= modal_helper('Header', target: 'modal_1') do
   .modal-body
     %p One fine body…
   .modal-footer
-    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-    %button.btn.btn-primary{:type => "button"} Save changes
+    %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} Close
+    %button.btn.btn-primary{:type => 'button'} Save changes
 
