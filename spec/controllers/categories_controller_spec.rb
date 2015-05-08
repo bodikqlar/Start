@@ -56,6 +56,7 @@ RSpec.describe CategoriesController, type: :controller do
     it 'redirects to the categories list' do
       delete :destroy, { id: category.id }
       expect(response).to redirect_to categories_path
+      expect(flash[:notice]).to eq I18n.t('category.successful_destroy')
     end
   end
 
@@ -77,6 +78,7 @@ RSpec.describe CategoriesController, type: :controller do
       it 'redirects to the categories' do
         post :create, category: attributes_for(:category)
         expect(response).to redirect_to categories_path
+        expect(flash[:notice]).to eq I18n.t('category.successful_create')
       end
     end
 
@@ -103,20 +105,22 @@ RSpec.describe CategoriesController, type: :controller do
 
       it 'updates the requested category' do
         category.reload
+        expect(category.name).to eq new_attributes[:name]
       end
 
       it 'redirects to the categories' do
         expect(response).to redirect_to categories_path
+        expect(flash[:notice]).to eq I18n.t('category.successful_update')
       end
     end
 
     context 'with invalid params' do
-      let(:unvalid_attributes) {{ name: nil }}
+      let(:invalid_attributes) {{ name: nil }}
+
       it 're-renders the edit method' do
-        put :update, {id: category.id, category: unvalid_attributes}
+        put :update, {id: category.id, category: invalid_attributes}
         expect(response).to render_template :edit
       end
-
     end
   end
 end

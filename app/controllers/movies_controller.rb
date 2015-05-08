@@ -9,19 +9,22 @@ class MoviesController < ApplicationController
   def create
     @movie = current_user.movies.build(movie_params)
     if @movie.save
-      redirect_to movies_path
+      redirect_to movies_path, notice: t('movie.successful_create')
     else
       render :new
     end
   end
 
   def index
-    @movies = Movie.includes(:user).all
+    @movies = Movie.includes(:user)
   end
 
   def destroy
-    @movie.destroy
-    redirect_to movies_path
+    if @movie.destroy
+      redirect_to movies_path, notice: t('movie.successful_destroy')
+    else
+      redirect_to movies_path, alert: t('movie.error_destroy')
+    end
   end
 
   def edit
@@ -30,7 +33,7 @@ class MoviesController < ApplicationController
   def update
     if @movie.update(movie_params)
       movie.category_ids= params[:movie][:categories]
-      redirect_to movies_path
+      redirect_to movies_path, notice: t('movie.successful_update')
     else
       render :edit
     end

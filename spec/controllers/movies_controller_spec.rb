@@ -13,19 +13,19 @@ RSpec.describe MoviesController, type: :controller do
       expect(assigns(:movies)).to eq [movie]
     end
 
-    it "renders the :index view" do
+    it 'renders the :index view' do
       expect(response).to render_template :index
     end
 
-    it "returns success response" do
+    it 'returns success response' do
       expect(response).to be_success
     end
   end
 
-  describe "GET #new" do
+  describe 'GET #new' do
     before(:each) { get :new }
 
-    it("assigns new movie as @movie") do
+    it('assigns new movie as @movie') do
       expect(assigns(:movie)).to be_a_new Movie
     end
 
@@ -33,7 +33,7 @@ RSpec.describe MoviesController, type: :controller do
       expect(response).to render_template :new
     end
 
-    it "returns success response" do
+    it 'returns success response' do
       expect(response).to be_success
     end
   end
@@ -60,6 +60,7 @@ RSpec.describe MoviesController, type: :controller do
     it 'redirects to the movies list' do
       delete :destroy, { id: movie.id }
       expect(response).to redirect_to movies_path
+      expect(flash[:notice]).to eq I18n.t('movie.successful_destroy')
     end
   end
 
@@ -81,6 +82,7 @@ RSpec.describe MoviesController, type: :controller do
       it 'redirects to the movies' do
         post :create, movie: attributes_for(:movie)
         expect(response).to redirect_to movies_path
+        expect(flash[:notice]).to eq I18n.t('movie.successful_create')
       end
     end
 
@@ -105,20 +107,21 @@ RSpec.describe MoviesController, type: :controller do
 
       it 'updates the requested movie' do
         movie.reload
+        expect(movie.name).to eq new_attributes[:name]
       end
 
       it 'redirects to the movies' do
         expect(response).to redirect_to movies_path
+        expect(flash[:notice]).to eq I18n.t('movie.successful_update')
       end
     end
 
     context 'with invalid params' do
-      let(:unvalid_attributes) {{ name: nil, rating: 1 }}
+      let(:invalid_attributes) { { name: nil, rating: 1 } }
       it 're-renders the edit method' do
-        put :update, {id: movie.id, movie: unvalid_attributes}
+        put :update, {id: movie.id, movie: invalid_attributes}
         expect(response).to render_template :edit
       end
-
     end
   end
 end
