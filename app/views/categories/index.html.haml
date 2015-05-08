@@ -1,0 +1,12 @@
+%h1 Categories
+%table
+  %thead
+    %tr
+      %th Name
+  %tbody
+    - @categories.each do |category|
+      %tr
+        %td= category.name
+        %td= link_to 'Edit', edit_category_path(category.id)
+        %td= link_to 'Delete', category_path(category.id) , method: :delete, data: { confirm: 'Are you sure?' }
+= link_to 'Add category', new_category_path

@@ -32,6 +32,11 @@ gem 'pg'
 
 gem 'haml'
 gem 'pry'
+
+gem 'rspec-rails'
+gem 'factory_girl_rails'
+gem 'faker'
+gem 'shoulda-matchers'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

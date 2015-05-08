@@ -1,0 +1,12 @@
+= form_for @movie do |f|
+  .name
+    = f.label :name
+    = f.text_field :name
+    = error_messages(@movie, :name)
+  .thumburl
+    = f.label :rating
+    = f.text_field :rating
+    = error_messages(@movie, :rating)
+    = f.collection_select :categories, @categories, :id, :name
+  .actions
+    = f.submit class: 'btn btn-primary'
